@@ -1,15 +1,20 @@
 class Account:
-    def __init__(this, name, bank, balance):
+    def __init__(this, name, job, gender, balance, city):
         this.name = name
-        this.bank = bank
+        this.job = job
         this.balance = balance 
+        this.gender = gender
+        this.city =  city
 
-    def create_pin(this):
-        pass
+    def create_pin(this, user_pin):
+        if len(user_pin) > 4:
+            return "You pin should be a four digits number please"
+        else:
+            pass
 
 class Savings(Account):
-    def __init__(this, name, bank, balance, noy):
-        super().__init__(name, bank, balance)
+    def __init__(this, name, job, balance, noy):
+        super().__init__(name, job, balance)
         this.noy = noy
 
     def show(this):
@@ -39,8 +44,8 @@ class Savings(Account):
                 print("Please supply a floating value for the amount")
         
 class Current(Account):
-    def __init__(this, name, bank, balance, noy):
-        super().__init__(name, bank, balance)
+    def __init__(this, name, job, balance, noy):
+        super().__init__(name, job, balance)
         this.noy = noy
 
     def show(this):
