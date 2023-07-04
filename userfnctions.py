@@ -24,3 +24,18 @@ val = (name, occupation, gender, datetime.now())
 new_db.execute(sql, val)
 
 print(new_db.rowcount, "records inserted.")
+
+def create_account():
+    pass
+
+def change_pin():
+    pass
+
+def withdraw():
+    pass
+
+def deposit():
+    pass
+
+def funds_transfer():
+    pass
