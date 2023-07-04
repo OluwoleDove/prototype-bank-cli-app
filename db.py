@@ -1,6 +1,6 @@
 import mysql.connector
 
-    ############################# DATABASE CODE #######################
+############################# DATABASE CODE #######################
 def create_db():
     mydb = mysql.connector.connect(
         host="localhost",

@@ -1,4 +1,7 @@
 from bankclass import Account, Savings, Current
+import db
+
+tnx_type = ["create_account", "change_pin", "deposit", "withdrawal", "close_account"]
 
 def bank_mix(user):
     option = input("\nSelect your account type: \n1. New User\n2. Old User\n\n")
@@ -22,7 +25,6 @@ def bank_mix(user):
         else:
             bank_mix(user)
     print()
-
 
 print("THIS PROGRAM MIMICS BANK TRANSACTIONS")
 user_input = []

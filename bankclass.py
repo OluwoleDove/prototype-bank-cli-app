@@ -1,7 +1,7 @@
 class Account:
-    def __init__(this, name, job, gender, balance, city):
+    def __init__(this, name, occupation, gender, balance, city):
         this.name = name
-        this.job = job
+        this.occupation = occupation
         this.balance = balance 
         this.gender = gender
         this.city =  city
@@ -13,8 +13,8 @@ class Account:
             pass
 
 class Savings(Account):
-    def __init__(this, name, job, balance, noy):
-        super().__init__(name, job, balance)
+    def __init__(this, name, occupation, balance, noy):
+        super().__init__(name, occupation, balance)
         this.noy = noy
 
     def show(this):
@@ -44,8 +44,8 @@ class Savings(Account):
                 print("Please supply a floating value for the amount")
         
 class Current(Account):
-    def __init__(this, name, job, balance, noy):
-        super().__init__(name, job, balance)
+    def __init__(this, name, occupation, balance, noy):
+        super().__init__(name, occupation, balance)
         this.noy = noy
 
     def show(this):
