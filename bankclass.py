@@ -1,6 +1,7 @@
 class Account:
-    def __init__(this, name, occupation, gender, balance, city):
-        this.name = name
+    def __init__(this, first_name, last_name, occupation, gender, balance, city):
+        this.first_name = first_name
+        this.last_name = last_name
         this.occupation = occupation
         this.balance = balance 
         this.gender = gender
@@ -13,8 +14,8 @@ class Account:
             pass
 
 class Savings(Account):
-    def __init__(this, name, occupation, balance, noy):
-        super().__init__(name, occupation, balance)
+    def __init__(this, first_name, last_name, occupation, balance, noy):
+        super().__init__(first_name, last_name, occupation, balance)
         this.noy = noy
 
     def show(this):
@@ -22,7 +23,7 @@ class Savings(Account):
     
     def calc_interest(this):
         this.balance += this.balance * 0.05 * this.noy
-        print(("Savings account balance for {0} after adding interest is; {1}").format(this.name, this.balance))
+        print(("Savings account balance for {0} after adding interest is; {1}").format(this.first_name, this.balance))
     
     def deposit(this):
         amount = float(input("Enter the deposit value: "))
@@ -44,8 +45,8 @@ class Savings(Account):
                 print("Please supply a floating value for the amount")
         
 class Current(Account):
-    def __init__(this, name, occupation, balance, noy):
-        super().__init__(name, occupation, balance)
+    def __init__(this, first_name, last_name, occupation, balance, noy):
+        super().__init__(first_name, last_name, occupation, balance)
         this.noy = noy
 
     def show(this):
@@ -53,7 +54,7 @@ class Current(Account):
 
     def calc_charges(this):
         this.balance -= this.balance * 0.02 * this.noy
-        print(("Current account balance for {0} after deducting charges is; {1}").format(this.name, this.balance))
+        print(("Current account balance for {0} after deducting charges is; {1}").format(this.first_name, this.balance))
     
     def deposit(this):
         amount = float(input("Enter the deposit value: "))
