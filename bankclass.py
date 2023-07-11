@@ -1,5 +1,5 @@
 class Account:
-    def __init__(this, first_name, last_name, occupation, gender, balance, city):
+    def __init__(this, first_name, last_name, occupation, city, gender, balance):
         this.first_name = first_name
         this.last_name = last_name
         this.occupation = occupation
