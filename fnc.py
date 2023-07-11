@@ -1,42 +1,30 @@
-from bankclass import Account, Savings, Current
-import db
-from userfnctions import create_account, change_pin, withdraw, deposit, fund_transfer
+from tnxfunctions import process_transactions, input_prompt
 
-tnx_type = ["create_account", "change_pin", "deposit", "withdrawal", "close_account"]
-
-def bank_mix(user):
-    option = input("\nSelect your account type: \n1. New User\n2. Old User\n\n")
+def choose_account():
+    option = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
     if option == "1":
-        my_acc = Account()
+        this_customer = input_prompt()
+        process_transactions(this_customer, "create_account")
+
+    elif option == "2":
+        this_customer = input_prompt()
+        process_transactions(this_customer, "create_account")
+
+def bank_mix():
+    option = input("\nChoose an option: \n1. Visitor\n2. Returning User\n\n")
+    if option == "1":
+        choose_account()
+        new_customer = input_prompt()
+        process_transactions(new_customer, "create_account")
     else:
-        option = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
-        if option == "1":
-            print(("Welcome to {0}").format(user_input[1]))
-            my_acc = Savings(user_input[0], user_input[1], float(user_input[2]), 5)
-            my_acc.show
-            my_acc.deposit()
-            my_acc.calc_interest()
-            print()
-        elif option == "2":
-            print(("Welcome to {0}").format(user_input[1]))
-            my_acc = Current(user_input[0], user_input[1], float(user_input[2]), 5)
-            my_acc.show
-            my_acc.withdraw()
-            my_acc.calc_charges()
-        else:
-            bank_mix(user)
-    print()
+        choose_account()
+        
 
-print("THIS PROGRAM MIMICS BANK TRANSACTIONS")
-user_input = []
-user_input.append(input("Enter customer's name: "))
-user_input.append(input("Enter bank name: "))
-user_input.append(50000)
 
-bank_mix(user_input)
+bank_mix()
 check = input("Do you want to perform another transaction? Y/N\n")
 while check == "Y" or check == "y":
-    bank_mix(user_input)
+    bank_mix()
     check = input("Do you want to perform another transaction? Y/N\n")
 
 print("\nThanks for banking with us.")
