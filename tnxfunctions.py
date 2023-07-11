@@ -2,28 +2,6 @@ import sys
 from db import create_db
 import datetime
 
-def receive_input():
-    for user_input in sys.stdin:
-        if 'q' == user_input.rstrip():
-            break
-        return user_input
-        #print(f'Input : {line}')
-
-firstname = receive_input()
-lastname = receive_input()
-occupation = receive_input()
-gender = receive_input()
-city = receive_input()
-
-user_dict = {"firstname":"", "lastname":"", "occupation":"", "gender":"", "city":""}
-print("Getting user input ... Please carefully suppy the following")
-for i in range(len(user_dict)):
-    new_input = (user_dict.keys())[i]
-    print(f"{new_input}: ", new_input)
-    user_dict.update({ (user_dict.keys())[i]: new_input.strip('\"') })
-
-print(create_db)
-new_db = create_db.cursor()
 
 def process_transactions(arg_dict, tnx_type):
     if tnx_type == 'create_account':
@@ -42,5 +20,31 @@ def process_transactions(arg_dict, tnx_type):
     elif tnx_type == 'deposit':
         pass
 
-def funds_transfer():
-    pass
+    elif tnx_type == 'funds_transfer':
+        pass
+
+    else:
+        return "Invalid Transaction"
+
+def receive_input():
+    for user_input in sys.stdin:
+        if 'q' == user_input.rstrip():
+            break
+        return user_input
+        #print(f'Input : {line}')
+
+
+user_dict = {"firstname":"", "lastname":"", "occupation":"", "gender":"", "city":""}
+print("Getting user input ... Please carefully supply the following")
+for key in user_dict:
+    print(f"{key}: ")
+    user_dict.update({ key : receive_input() })
+
+print(user_dict)
+
+'''
+process_transactions(user_dict, 'create_account')
+
+print(create_db)
+new_db = create_db.cursor()
+'''
