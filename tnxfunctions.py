@@ -18,9 +18,9 @@ city = receive_input()
 user_dict = {"firstname":"", "lastname":"", "occupation":"", "gender":"", "city":""}
 print("Getting user input ... Please carefully suppy the following")
 for i in range(len(user_dict)):
-    new_input = (user_dict.keys())[i].strip('\"')
-    print(f"{(user_dict.keys())[i]}: ", new_input)
-    user_dict.update({ user_dict.keys())[i]: new_input })
+    new_input = (user_dict.keys())[i]
+    print(f"{new_input}: ", new_input)
+    user_dict.update({ (user_dict.keys())[i]: new_input.strip('\"') })
 
 print(create_db)
 new_db = create_db.cursor()
