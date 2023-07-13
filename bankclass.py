@@ -1,9 +1,12 @@
 class Account:
-    def __init__(this, first_name, last_name, occupation, city, gender):
+    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city):
         this.first_name = first_name
         this.last_name = last_name
+        this.email = email
+        this.phone = phone
         this.occupation = occupation
         this.gender = gender
+        this.dob = dob
         this.city =  city
         this.balance = 0
 
@@ -14,8 +17,8 @@ class Account:
             pass
 
 class Savings(Account):
-    def __init__(this, first_name, last_name, occupation, balance, noy):
-        super().__init__(first_name, last_name, occupation, balance)
+    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, balance, noy):
+        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, balance)
         this.noy = noy
 
     def show(this):
@@ -26,27 +29,14 @@ class Savings(Account):
         print(("Savings account balance for {0} after adding interest is; {1}").format(this.first_name, this.balance))
     
     def deposit(this, balance, amount):
-        amount = float(amount)
-        if(isinstance(amount, float) == True or isinstance(amount, int) == True):
-            this.balance = balance
-            this.balance += amount
-            return this.balance
-        else:
-            return "Only numbers please"
+        this.balance = balance
+        this.balance += amount
+        return this.balance
 
-    def withdraw(this):
-        try:
-            amount = float(input("Enter the withdrawal amount: "))
-            if amount > this.balance:
-                # raise the ValueError
-                raise ValueError("Insufficient Funds")
-            else:
-                this.balance -= amount
-                print("Your new current balance is: " + str(this.balance))
-        # if false then raise the value error
-        except ValueError as e:
-                print(e)
-                print("Please supply a floating value for the amount")
+    def withdraw(this, balance, amount):
+        this.balance = balance
+        this.balance += amount
+        return this.balance
         
 class Current(Account):
     def __init__(this, first_name, last_name, occupation, balance, noy):

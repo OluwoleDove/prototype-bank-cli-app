@@ -1,23 +1,28 @@
 from tnxfunctions import process_transactions, input_prompt
 
-def choose_account():
+def choose_account(accounts_arg):
     option = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
     if option == "1":
-        this_customer = input_prompt()
-        process_transactions(this_customer, "create_account")
-
+        tnx_type = input("\nSelect transaction type: \n1. Change Pin\n2. Deposit\n3. Withdrawal\n4. Transfer\n5. Close Account\n\n")
+        if tnx_type == "1":
+            this_customer = input_prompt(accounts_arg)
+            process_transactions(this_customer, "change_pin")
     elif option == "2":
-        this_customer = input_prompt()
-        process_transactions(this_customer, "create_account")
+        pass
+        
 
 def bank_mix():
+    users_tab = ["firstname", "lastname", "email", "phone", "occupation", "gender", "dob", "city", "joindate"]
+    accounts_tab = ["account_type", "balance", "charges", "interests", "pin", "last_edited"]
+    transactions_tab = ["transaction_type", "transaction_amount", "transaction_date"]
+    
     option = input("\nChoose an option: \n1. Visitor\n2. Returning User\n\n")
     if option == "1":
         choose_account()
-        new_customer = input_prompt()
+        new_customer = input_prompt(users_tab)
         process_transactions(new_customer, "create_account")
     else:
-        choose_account()
+        choose_account(accounts_tab)
         
 
 
