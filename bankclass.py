@@ -1,11 +1,11 @@
 class Account:
-    def __init__(this, first_name, last_name, occupation, city, gender, balance):
+    def __init__(this, first_name, last_name, occupation, city, gender):
         this.first_name = first_name
         this.last_name = last_name
         this.occupation = occupation
-        this.balance = balance 
         this.gender = gender
         this.city =  city
+        this.balance = 0
 
     def create_pin(this, user_pin):
         if len(user_pin) > 4:
@@ -25,10 +25,14 @@ class Savings(Account):
         this.balance += this.balance * 0.05 * this.noy
         print(("Savings account balance for {0} after adding interest is; {1}").format(this.first_name, this.balance))
     
-    def deposit(this):
-        amount = float(input("Enter the deposit value: "))
-        this.balance += amount
-        print("Your new savings balance is: " + str(this.balance))
+    def deposit(this, balance, amount):
+        amount = float(amount)
+        if(isinstance(amount, float) == True or isinstance(amount, int) == True):
+            this.balance = balance
+            this.balance += amount
+            return this.balance
+        else:
+            return "Only numbers please"
 
     def withdraw(this):
         try:
