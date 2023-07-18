@@ -1,28 +1,24 @@
 from tnxfunctions import process_transactions, input_prompt
 
-def choose_account(accounts_arg):
-    option = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
-    if option == "1":
-        tnx_type = input("\nSelect transaction type: \n1. Change Pin\n2. Deposit\n3. Withdrawal\n4. Transfer\n5. Close Account\n\n")
-        if tnx_type == "1":
-            this_customer = input_prompt(accounts_arg)
-            process_transactions(this_customer, "change_pin")
-    elif option == "2":
-        pass
-        
-
-def bank_mix():
+def choose_account():
     users_tab = ["firstname", "lastname", "email", "phone", "occupation", "gender", "dob", "city", "joindate"]
     accounts_tab = ["account_type", "balance", "charges", "interests", "pin", "last_edited"]
     transactions_tab = ["transaction_type", "transaction_amount", "transaction_date"]
-    
-    option = input("\nChoose an option: \n1. Visitor\n2. Returning User\n\n")
+    acc_type = ""
+    option = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
     if option == "1":
-        choose_account()
-        new_customer = input_prompt(users_tab)
-        process_transactions(new_customer, "create_account")
-    else:
-        choose_account(accounts_tab)
+        acc_type = "Savings"
+    elif option == "2":
+        acc_type = "Current"
+        tnx_type = input("\nSelect transaction type: \n1. Create Account \n2. Change Pin\n3. Check Balance\n4. Deposit\n5. Withdrawal\n6. Transfer\n.9. Edit User Details\n8. Close Account\n\n")
+        tnx_dict = {"1":"Create Account", "2":"Change Pin", "3":"Check Balance", "4":"Deposit", "5":"Withdrawal", "6":"Transfer", "7":"Edit User Details", "8":"Close Account"}
+    
+    this_customer = input_prompt(users_tab)
+    process_transactions(this_customer, "change_pin")
+        
+
+def bank_mix():
+    choose_account()
         
 
 
