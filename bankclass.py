@@ -39,8 +39,8 @@ class Savings(Account):
         return this.balance
         
 class Current(Account):
-    def __init__(this, first_name, last_name, occupation, balance, noy):
-        super().__init__(first_name, last_name, occupation, balance)
+    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, balance, noy):
+        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, balance)
         this.noy = noy
 
     def show(this):
@@ -50,21 +50,12 @@ class Current(Account):
         this.balance -= this.balance * 0.02 * this.noy
         print(("Current account balance for {0} after deducting charges is; {1}").format(this.first_name, this.balance))
     
-    def deposit(this):
-        amount = float(input("Enter the deposit value: "))
+    def deposit(this, balance, amount):
+        this.balance = balance
         this.balance += amount
-        print("Your new savings balance is: " + str(this.balance))
+        return this.balance
 
-    def withdraw(this):
-        try:
-            amount = float(input("Enter the withdrawal amount: "))
-            if amount > this.balance:
-                # raise the ValueError
-                raise ValueError("Insufficient Funds")
-            else:
-                this.balance -= amount
-                print("Your new current balance is: " + str(this.balance))
-        # if false then raise the value error
-        except ValueError as e:
-                print(e)
-                print("Please supply a floating value for the amount")
+    def withdraw(this, balance, amount):
+        this.balance = balance
+        this.balance += amount
+        return this.balance

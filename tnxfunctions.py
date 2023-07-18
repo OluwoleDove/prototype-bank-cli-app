@@ -15,7 +15,12 @@ def check_db(my_model):
 
     return this_query
 
-def process_transactions(arg_dict, tnx_type):
+def process_transactions(arg_dict, account_type, tnx_type):
+    if account_type == "Savings":
+        this_client = Savings()
+    elif account_type == "Current":
+        this_client = Current()
+        
     db_instance = create_db.cursor()
 
     if tnx_type == 'create_account':
@@ -27,7 +32,25 @@ def process_transactions(arg_dict, tnx_type):
     elif tnx_type == 'change_pin':
         pass
 
-    elif tnx_type == 'withdraw':
+    elif tnx_type == 'check_balance':
+        pass
+
+    elif tnx_type == 'deposit':
+        sql = "SELECT id, email FROM users"
+        db_instance.execute(sql)
+        my_query = db_instance.fetchone()
+        print(my_query)
+        this_customer = Savings()
+        depositamount = str(input("Enter the deposit amount: "))
+        my_deposit = this_customer.deposit(float(depositamount))
+        print(my_deposit)
+        sql = "UPDATE transactions SET balance = %s WHERE email = %s"
+        val = (my_deposit, email)
+        db_instance.execute(sql, val)
+        create_db.commit()
+        print(db_instance.rowcount, "records affected.")
+
+    elif tnx_type == 'withdrawal':
         
         my_query = check_db(this_db)
         balance = my_query[-1]
@@ -55,24 +78,11 @@ def process_transactions(arg_dict, tnx_type):
         except ValueError as e:
             print(e)
             print("Please supply a floating value for the amount")
-    
-
-    elif tnx_type == 'deposit':
-        sql = "SELECT id, email FROM users"
-        db_instance.execute(sql)
-        my_query = db_instance.fetchone()
-        print(my_query)
-        this_customer = Savings()
-        depositamount = str(input("Enter the deposit amount: "))
-        my_deposit = this_customer.deposit(float(depositamount))
-        print(my_deposit)
-        sql = "UPDATE transactions SET balance = %s WHERE email = %s"
-        val = (my_deposit, email)
-        db_instance.execute(sql, val)
-        create_db.commit()
-        print(db_instance.rowcount, "records affected.")
 
     elif tnx_type == 'funds_transfer':
+        pass
+
+    elif tnx_type == 'close_account':
         pass
 
     else:
