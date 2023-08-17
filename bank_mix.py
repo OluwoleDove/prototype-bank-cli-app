@@ -2,7 +2,6 @@ from receive_inputs import input_prompt
 from tnx_func import process_transactions
 
 def bank_mix():
-    this_customer = {}
     acc_type = ""
     option = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
     if option == "1":
@@ -19,7 +18,7 @@ def bank_mix():
     if isinstance(int(tnx_type), int):   
         this_customer = input_prompt(tnx_dict[tnx_type])
     else:
-        pin_num = input("Your pin number please: ")
-        this_customer.update({"pin":pin_num})
+        print("Only numerical entry please! Try again.")
+        bank_mix()
 
     process_transactions(this_customer, acc_type, tnx_dict[tnx_type])
