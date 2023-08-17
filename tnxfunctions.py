@@ -105,3 +105,4 @@ def input_prompt(client_choice):
             input_dict.update({ param : get_input() })
 
     print(input_dict)
+    return input_dict
