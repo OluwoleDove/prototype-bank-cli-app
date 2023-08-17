@@ -1,5 +1,5 @@
 from bank_mix import bank_mix
-import tnxfunctions
+import receive_inputs
 
 def main():
     print("A PROTOTYPE BANK CLI APP BUILT WITH PYTHON AND MYSQL\nWelcome to Techcurious Bank PLC\n")
