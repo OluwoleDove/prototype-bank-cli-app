@@ -14,12 +14,16 @@ def check_db(my_model):
     return this_query
 
 def process_transactions(arg_dict, account_type, tnx_type):
+    client_list = list(arg_dict.values())
+    this_client_list = []
+    for item in client_list:
+        this_client_list.append(item.split("\n")[0])
+    print(this_client_list)
+
     if account_type == "Savings":
-        client_list = list(arg_dict.values())
-        print(client_list)
-        this_client = Savings(client_list)
+        this_client = Savings(this_client_list)
     elif account_type == "Current":
-        this_client = Current()
+        this_client = Current(this_client_list)
         
     db_instance = create_db.cursor()
 
