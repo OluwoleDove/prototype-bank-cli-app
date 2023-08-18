@@ -15,8 +15,9 @@ def check_db(my_model):
 
 def process_transactions(arg_dict, account_type, tnx_type):
     if account_type == "Savings":
-        print(arg_dict.values())
-        this_client = Savings()
+        client_list = list(arg_dict.values())
+        print(client_list)
+        this_client = Savings(client_list)
     elif account_type == "Current":
         this_client = Current()
         
