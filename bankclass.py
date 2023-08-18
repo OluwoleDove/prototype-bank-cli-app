@@ -4,9 +4,9 @@ class Account:
         this.last_name = last_name
         this.email = email
         this.phone = phone
-        this.occupation = occupation
         this.gender = gender
         this.dob = dob
+        this.occupation = occupation
         this.city =  city
         this.balance = 0
 
@@ -17,9 +17,9 @@ class Account:
             pass
 
 class Savings(Account):
-    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, balance, noy):
-        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, balance)
-        this.noy = noy
+    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city):
+        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, city)
+        this.noy = 0
 
     def show(this):
         print("Your savings account balance is " + this.balance)
@@ -39,9 +39,9 @@ class Savings(Account):
         return this.balance
         
 class Current(Account):
-    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, balance, noy):
-        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, balance)
-        this.noy = noy
+    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city):
+        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, city)
+        this.noy = 0
 
     def show(this):
         print("Your current account balance is " + this.balance)
