@@ -21,7 +21,7 @@ def process_transactions(arg_dict, account_type, tnx_type):
 
     if tnx_type == 'create_account':
         sql = "INSERT INTO users (firstname, lastname, email, phone, gender, dob, occupation, city, join_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'], arg_dict['gender'], arg_dict['dob']arg_dict['occupation'], arg_dict['city'], datetime.now())
+        val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'], arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'], datetime.now())
         db_instance.execute(sql, val)
         return f"{db_instance.rowcount}, client created."
 
