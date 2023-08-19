@@ -1,1 +1,0 @@
-db_params = {"user":"thegeekme", "password":"#cxsoft_J8MySQL"}
