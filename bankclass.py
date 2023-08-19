@@ -8,7 +8,7 @@ class Account:
         this.dob = dob
         this.occupation = occupation
         this.city =  city
-        this.balance = 0
+        this.balance = 0.0
 
     def create_pin(this, user_pin):
         if len(user_pin) > 4:
