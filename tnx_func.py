@@ -2,24 +2,16 @@ from bankclass import Account, Savings, Current
 from db import create_db
 import datetime
 
-this_db = create_db().cursor()
-
-def check_db(my_model):
-    email = str(input("Type your email: "))
-    sql = "SELECT * FROM accounts where user_id = %s"
-    val = ([email])
+def find_client(my_model):
+    pin = str(input("Your pin number please: "))
+    sql = "SELECT * FROM accounts where pin = %s"
+    val = ([pin])
     my_model.execute(sql, val)
     this_query = my_model.fetchone()
 
     return this_query
 
 def process_transactions(arg_dict, account_type, tnx_type):
-    '''client_list = list(arg_dict.values())
-    this_client_list = []
-    for item in client_list:
-        this_client_list.append(item.split("\n")[0])
-    print(this_client_list)'''
-
     if account_type == "Savings":
         this_client = Savings(arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'],  arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'])
     elif account_type == "Current":
@@ -28,10 +20,10 @@ def process_transactions(arg_dict, account_type, tnx_type):
     db_instance = create_db.cursor()
 
     if tnx_type == 'create_account':
-        sql = "INSERT INTO users (firstname, lastname occupation, gender, joindate) VALUES (%s, %s, %s, %s, %s)"
-        val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['occupation'], arg_dict['gender'], datetime.now())
+        sql = "INSERT INTO users (firstname, lastname, email, phone, gender, dob, occupation, city, join_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'], arg_dict['gender'], arg_dict['dob']arg_dict['occupation'], arg_dict['city'], datetime.now())
         db_instance.execute(sql, val)
-        return f"{db_instance.rowcount}, records inserted."
+        return f"{db_instance.rowcount}, client created."
 
     elif tnx_type == 'change_pin':
         pass
@@ -56,7 +48,7 @@ def process_transactions(arg_dict, account_type, tnx_type):
 
     elif tnx_type == 'withdrawal':
         
-        my_query = check_db(this_db)
+        my_query = find_client(this_db)
         balance = my_query[-1]
         email = my_query[7]
         print(f"This client's record is - {my_query}\nThe balance is {balance}")
