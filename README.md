@@ -24,3 +24,8 @@ mydb = mysql.connector.connect(
   password="{Your Database Password}",
   database="{Your Model's Name}" #returns an error if DB does not exist
 )
+
+Create a db_params.py file and set your parameters as shown;
+db_params = {"user":{YOUR_DB_ADMIN_USERNAME}, "password":{YOUR_DB_ADMIN_PASSWORD}}
+
+Run createtables.py once. Once your table is created, you need not run that script again except you delete your tables.
