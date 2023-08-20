@@ -1,6 +1,7 @@
 from bankclass import Account, Savings, Current
-from db import create_db
+from db import mydb
 import datetime
+import random
 
 def find_client(my_model):
     pin = str(input("Your pin number please: "))
@@ -11,22 +12,40 @@ def find_client(my_model):
 
     return this_query
 
+def gen_account(this_len):
+    acc_num = ''
+    chars = '0123456789'
+    for _ in range(this_len):
+        acc_num += random.choice(chars)
+   
+    return acc_num
+
+
 def process_transactions(arg_dict, account_type, tnx_type):
     if account_type == "Savings":
         this_client = Savings(arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'],  arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'])
     elif account_type == "Current":
         this_client = Current(arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'],  arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'])
         
-    db_instance = create_db.cursor()
+    db_instance = mydb.cursor()
 
     if tnx_type == 'create_account':
+        pin = 1000
+        new_account = gen_account(10)
+        #Create User's Bio
         sql = "INSERT INTO users (firstname, lastname, email, phone, gender, dob, occupation, city, join_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'], arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'], datetime.now())
         db_instance.execute(sql, val)
+
+        #Create User's Account
+        sql = "INSERT INTO accounts (user_id, account_type, balance, charge, interest, pin, last_edited) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'], arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'], datetime.now())
+        db_instance.execute(sql, val)
+        mydb.commit()
         return f"{db_instance.rowcount}, client created."
 
     elif tnx_type == 'change_pin':
-        pass
+        input("Enter your previous pin ")
 
     elif tnx_type == 'check_balance':
         pass
@@ -43,12 +62,12 @@ def process_transactions(arg_dict, account_type, tnx_type):
         sql = "UPDATE transactions SET balance = %s WHERE email = %s"
         val = (my_deposit, email)
         db_instance.execute(sql, val)
-        create_db.commit()
+        mydb.commit()
         print(db_instance.rowcount, "records affected.")
 
     elif tnx_type == 'withdrawal':
         
-        my_query = find_client(this_db)
+        my_query = find_client(db_instance)
         balance = my_query[-1]
         email = my_query[7]
         print(f"This client's record is - {my_query}\nThe balance is {balance}")
@@ -67,8 +86,8 @@ def process_transactions(arg_dict, account_type, tnx_type):
                 print(this_withdrawal)
                 sql = "UPDATE Bank_Account SET balance = %s WHERE email = %s"
                 val = (this_withdrawal, email)
-                this_db.execute(sql, val)
-                db_instance.commit()
+                db_instance.execute(sql, val)
+                mydb.commit()
                 print(this_db.rowcount, "records affected.")
             # if false then raise the value error
         except ValueError as e:
