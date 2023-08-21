@@ -32,16 +32,17 @@ def process_transactions(arg_dict, account_type, tnx_type):
     if tnx_type == 'create_account':
         pin = 1000
         new_account = gen_account(10)
-        #Create User's Bio
+        #Create Client's Bio
         sql = "INSERT INTO users (firstname, lastname, email, phone, gender, dob, occupation, city, join_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'], arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'], datetime.now())
         db_instance.execute(sql, val)
 
+        #Get client's id from user records
         sql = "SELECT id FROM users where email = %s"
-        val = arg_dict['email']
+        val = (arg_dict['email'])
         db_instance.execute(sql, val)
         userID = db_instance.fetchone()
-        #Create User's Account
+        #Create Client's Account
         sql = "INSERT INTO accounts (user_id, account_type, balance, charge, interest, pin, last_edited) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         val = (userID, account_type, arg_dict['balance'], 0, 0, datetime.now())
         db_instance.execute(sql, val)
