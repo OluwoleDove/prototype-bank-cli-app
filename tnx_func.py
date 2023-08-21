@@ -50,7 +50,21 @@ def process_transactions(arg_dict, account_type, tnx_type):
         return f"{db_instance.rowcount}, client created."
 
     elif tnx_type == 'change_pin':
-        input("Enter your previous pin ")
+        try:
+            prev_pin = int(input("Enter your previous pin "))
+            if isinstance(prev_pin, int) == False:
+                 # raise the ValueError
+                raise ValueError("Only Numbers Please")
+            else:
+                sql = "SELECT * FROM accounts where pin = %s"
+                val = (arg_dict['email'])
+                db_instance.execute(sql, val)
+                mydb.commit()
+                print(db_instance.rowcount, "records affected.")
+            # if false then raise the value error
+        except ValueError as e:
+            print(e)
+            print("Please supply a four digit integer")
 
     elif tnx_type == 'check_balance':
         pass
@@ -93,7 +107,7 @@ def process_transactions(arg_dict, account_type, tnx_type):
                 val = (this_withdrawal, email)
                 db_instance.execute(sql, val)
                 mydb.commit()
-                print(this_db.rowcount, "records affected.")
+                print(db_instance.rowcount, "records affected.")
             # if false then raise the value error
         except ValueError as e:
             print(e)
