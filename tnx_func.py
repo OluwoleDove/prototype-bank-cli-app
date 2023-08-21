@@ -37,7 +37,10 @@ def process_transactions(arg_dict, account_type, tnx_type):
         val = (arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'], arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'], datetime.now())
         db_instance.execute(sql, val)
 
-        userID = ""
+        sql = "SELECT id FROM users where email = %s"
+        val = arg_dict['email']
+        db_instance.execute(sql, val)
+        userID = db_instance.fetchone()
         #Create User's Account
         sql = "INSERT INTO accounts (user_id, account_type, balance, charge, interest, pin, last_edited) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         val = (userID, account_type, arg_dict['balance'], 0, 0, datetime.now())
