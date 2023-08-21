@@ -17,9 +17,10 @@ class Account:
             pass
 
 class Savings(Account):
-    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city):
-        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, city)
+    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city, balance):
+        super().__init__(first_name, last_name, email, phone, gender, dob, occupation, city, balance)
         this.noy = 0
+        this.balance = this.balance
 
     def show(this):
         print("Your savings account balance is " + this.balance)

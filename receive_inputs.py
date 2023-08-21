@@ -10,7 +10,7 @@ def get_input():
 def input_prompt(client_choice):
     input_dict = {}
     if client_choice == "create_account":
-        new_client_tab = ["firstname", "lastname", "email", "phone", "gender", "dob", "occupation", "city"]
+        new_client_tab = ["firstname", "lastname", "email", "phone", "gender", "dob", "occupation", "city", "balance"]
         print("Getting user input ... Please carefully supply the following\n")
         for param in new_client_tab:
             print(f"{param}: ")
