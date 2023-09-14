@@ -1,5 +1,13 @@
 import shutil
 import os
+import tkinter as tk
+from tkinter import filedialog
+
+def get_image_path_from_dialog():
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename(title="Select an image file")
+    return file_path
 
 def save_image_to_folder(image_path, save_folder):
     try:
@@ -20,7 +28,7 @@ def save_image_to_folder(image_path, save_folder):
         print(f"An error occurred: {str(e)}")
 
 if __name__ == "__main__":
-    image_path = input("Enter the path of the image file: ")
+    image_path = get_image_path_from_dialog()
     save_folder = "avatar"
 
     save_image_to_folder(image_path, save_folder)
