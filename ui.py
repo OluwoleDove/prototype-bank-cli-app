@@ -4,11 +4,12 @@ import tkinter as tk
 from tkinter import filedialog
 import random
 import string
-from db import mydb, new_db  # Import your database-related modules here
+from PIL import Image, ImageTk  # You need to install the 'Pillow' library for image processing
+
+# Import your database-related modules here
+from db import mydb, new_db
 
 def get_image_path_from_dialog():
-    root = tk.Tk()
-    root.withdraw()
     file_path = filedialog.askopenfilename(title="Select an image file")
     return file_path
 
@@ -38,11 +39,13 @@ def save_image_with_random_name(image_path, base_folder, user_name):
 
         shutil.copyfile(image_path, save_path)
         print(f"Image saved as {new_file_name} in {user_folder}")
+        return save_path  # Return the saved image path
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")
+        return None
 
-def create_account():
+def submit_transaction():
     user_name = name_entry.get()
     user_firstname = firstname_entry.get()
     user_lastname = lastname_entry.get()
@@ -52,20 +55,27 @@ def create_account():
     user_dob = dob_entry.get()
     user_occupation = occupation_entry.get()
     user_city = city_entry.get()
-    
+
     # Insert user data into your database tables here
     # You can use the variables above to insert data into 'users' and 'accounts' tables
 
+    # Perform the transaction logic here
+
+def update_uploaded_image():
     image_path = get_image_path_from_dialog()
-    base_folder = "avatar"
-    save_image_with_random_name(image_path, base_folder, user_name)
+    if image_path:
+        img = Image.open(image_path)
+        img.thumbnail((150, 150))  # Resize the image to fit in the form
+        img = ImageTk.PhotoImage(img)
+        image_label.config(image=img)
+        image_label.image = img  # Keep a reference to prevent it from being garbage collected
 
 # Create a Tkinter window
 root = tk.Tk()
 root.title("Banking App")
 
 # Create labels and entry fields for user input
-name_label = tk.Label(root, text="Full Name:")
+name_label = tk.Label(root, text="Name:")
 name_label.pack()
 name_entry = tk.Entry(root)
 name_entry.pack()
@@ -113,13 +123,17 @@ city_label.pack()
 city_entry = tk.Entry(root)
 city_entry.pack()
 
+# Create an image label to display the uploaded image
+image_label = tk.Label(root)
+image_label.pack()
+
 # Create a button to select an image
-image_button = tk.Button(root, text="Select an image", command=get_image_path_from_dialog)
+image_button = tk.Button(root, text="Upload Image", command=update_uploaded_image)
 image_button.pack()
 
-# Create a button to create an account
-create_account_button = tk.Button(root, text="Create Account", command=create_account)
-create_account_button.pack()
+# Create a button to submit a transaction
+transaction_button = tk.Button(root, text="Submit Transaction", command=submit_transaction)
+transaction_button.pack()
 
 # Start the Tkinter main loop
 root.mainloop()
