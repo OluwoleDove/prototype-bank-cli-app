@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import filedialog
 import random
 import string
-from PIL import Image, ImageTk  # You need to install the 'Pillow' library for image processing
+from PIL import Image, ImageTk
 
 # Import your database-related modules here
 from db import mydb, new_db
@@ -39,13 +39,13 @@ def save_image_with_random_name(image_path, base_folder, user_name):
 
         shutil.copyfile(image_path, save_path)
         print(f"Image saved as {new_file_name} in {user_folder}")
-        return save_path  # Return the saved image path
+        return save_path
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
 
-def submit_transaction():
+def submit_user_data():
     user_name = name_entry.get()
     user_firstname = firstname_entry.get()
     user_lastname = lastname_entry.get()
@@ -59,16 +59,115 @@ def submit_transaction():
     # Insert user data into your database tables here
     # You can use the variables above to insert data into 'users' and 'accounts' tables
 
-    # Perform the transaction logic here
+    # Create a folder for the user's avatar
+    base_folder = "avatar"
+    user_folder = os.path.join(base_folder, user_name)
+    if not os.path.exists(user_folder):
+        os.makedirs(user_folder)
+
+    image_file_path = get_image_path_from_dialog()
+    image_path = save_image_with_random_name(image_file_path, user_folder, user_name)
+
+    # Placeholder logic for transaction submission
+    print("User data submitted")
+
 
 def update_uploaded_image():
     image_path = get_image_path_from_dialog()
     if image_path:
         img = Image.open(image_path)
-        img.thumbnail((150, 150))  # Resize the image to fit in the form
+        img.thumbnail((150, 150))
         img = ImageTk.PhotoImage(img)
         image_label.config(image=img)
-        image_label.image = img  # Keep a reference to prevent it from being garbage collected
+        image_label.image = img
+
+def transaction_selection():
+    # Hide the current form elements
+    name_label.pack_forget()
+    name_entry.pack_forget()
+    firstname_label.pack_forget()
+    firstname_entry.pack_forget()
+    lastname_label.pack_forget()
+    lastname_entry.pack_forget()
+    email_label.pack_forget()
+    email_entry.pack_forget()
+    phone_label.pack_forget()
+    phone_entry.pack_forget()
+    gender_label.pack_forget()
+    gender_menu.pack_forget()
+    dob_label.pack_forget()
+    dob_entry.pack_forget()
+    occupation_label.pack_forget()
+    occupation_entry.pack_forget()
+    city_label.pack_forget()
+    city_entry.pack_forget()
+    image_label.pack_forget()
+    image_button.pack_forget()
+    submit_button.pack_forget()
+    
+    # Create a transaction selection page
+    selection_label = tk.Label(root, text="Select Transaction:")
+    selection_label.pack()
+    
+    transaction_options = ["Deposit", "Withdraw", "Transfer", "Block"]
+    transaction_var = tk.StringVar()
+    transaction_var.set(transaction_options[0])  # Default value
+    transaction_menu = tk.OptionMenu(root, transaction_var, *transaction_options)
+    transaction_menu.pack()
+    
+    # Create a button to proceed with the selected transaction
+    proceed_button = tk.Button(root, text="Proceed", command=lambda: show_transaction_form(transaction_var.get()))
+    proceed_button.pack()
+
+def show_transaction_form(selected_transaction):
+    # Create a form for the selected transaction
+    transaction_form_label = tk.Label(root, text=f"{selected_transaction} Transaction Form:")
+    transaction_form_label.pack()
+    
+    # Add form fields based on the selected transaction
+    if selected_transaction == "Deposit":
+        amount_label = tk.Label(root, text="Amount:")
+        amount_label.pack()
+        amount_entry = tk.Entry(root)
+        amount_entry.pack()
+        # Add more fields as needed for deposit transaction
+        
+    elif selected_transaction == "Withdraw":
+        amount_label = tk.Label(root, text="Amount:")
+        amount_label.pack()
+        amount_entry = tk.Entry(root)
+        amount_entry.pack()
+        # Add more fields as needed for withdraw transaction
+        
+    elif selected_transaction == "Transfer":
+        # Add fields for transfer transaction
+        pass
+        
+    elif selected_transaction == "Block":
+        # Add fields for block transaction
+        pass
+    
+    # Create a button to submit the transaction
+    transaction_submit_button = tk.Button(root, text="Submit Transaction", command=lambda: submit_transaction(selected_transaction))
+    transaction_submit_button.pack()
+
+def submit_transaction(selected_transaction):
+    # Perform the transaction logic based on the selected transaction
+    if selected_transaction == "Deposit":
+        # Logic for deposit transaction
+        pass
+        
+    elif selected_transaction == "Withdraw":
+        # Logic for withdraw transaction
+        pass
+        
+    elif selected_transaction == "Transfer":
+        # Logic for transfer transaction
+        pass
+        
+    elif selected_transaction == "Block":
+        # Logic for block transaction
+        pass
 
 # Create a Tkinter window
 root = tk.Tk()
@@ -103,7 +202,7 @@ phone_entry.pack()
 gender_label = tk.Label(root, text="Gender:")
 gender_label.pack()
 gender_var = tk.StringVar()
-gender_var.set("Male")  # Default value
+gender_var.set("Male")
 gender_options = ["Male", "Female", "Prefer not to say"]
 gender_menu = tk.OptionMenu(root, gender_var, *gender_options)
 gender_menu.pack()
@@ -131,9 +230,8 @@ image_label.pack()
 image_button = tk.Button(root, text="Upload Image", command=update_uploaded_image)
 image_button.pack()
 
-# Create a button to submit a transaction
-transaction_button = tk.Button(root, text="Submit Transaction", command=submit_transaction)
-transaction_button.pack()
+submit_button = tk.Button(root, text="Submit User Data", command=submit_user_data)
+submit_button.pack()
 
 # Start the Tkinter main loop
 root.mainloop()
