@@ -44,20 +44,74 @@ def save_image_with_random_name(image_path, base_folder, user_name):
 
 def create_account():
     user_name = name_entry.get()
+    user_firstname = firstname_entry.get()
+    user_lastname = lastname_entry.get()
+    user_email = email_entry.get()
+    user_phone = phone_entry.get()
+    user_gender = gender_var.get()
+    user_dob = dob_entry.get()
+    user_occupation = occupation_entry.get()
+    user_city = city_entry.get()
+    
+    # Insert user data into your database tables here
+    # You can use the variables above to insert data into 'users' and 'accounts' tables
+
     image_path = get_image_path_from_dialog()
     base_folder = "avatar"
     save_image_with_random_name(image_path, base_folder, user_name)
-    # Now you can add code to insert the user's information into your database
 
 # Create a Tkinter window
 root = tk.Tk()
 root.title("Banking App")
 
 # Create labels and entry fields for user input
-name_label = tk.Label(root, text="Enter your name:")
+name_label = tk.Label(root, text="Full Name:")
 name_label.pack()
 name_entry = tk.Entry(root)
 name_entry.pack()
+
+firstname_label = tk.Label(root, text="First Name:")
+firstname_label.pack()
+firstname_entry = tk.Entry(root)
+firstname_entry.pack()
+
+lastname_label = tk.Label(root, text="Last Name:")
+lastname_label.pack()
+lastname_entry = tk.Entry(root)
+lastname_entry.pack()
+
+email_label = tk.Label(root, text="Email:")
+email_label.pack()
+email_entry = tk.Entry(root)
+email_entry.pack()
+
+phone_label = tk.Label(root, text="Phone:")
+phone_label.pack()
+phone_entry = tk.Entry(root)
+phone_entry.pack()
+
+gender_label = tk.Label(root, text="Gender:")
+gender_label.pack()
+gender_var = tk.StringVar()
+gender_var.set("Male")  # Default value
+gender_options = ["Male", "Female", "Prefer not to say"]
+gender_menu = tk.OptionMenu(root, gender_var, *gender_options)
+gender_menu.pack()
+
+dob_label = tk.Label(root, text="Date of Birth (YYYY-MM-DD):")
+dob_label.pack()
+dob_entry = tk.Entry(root)
+dob_entry.pack()
+
+occupation_label = tk.Label(root, text="Occupation:")
+occupation_label.pack()
+occupation_entry = tk.Entry(root)
+occupation_entry.pack()
+
+city_label = tk.Label(root, text="City:")
+city_label.pack()
+city_entry = tk.Entry(root)
+city_entry.pack()
 
 # Create a button to select an image
 image_button = tk.Button(root, text="Select an image", command=get_image_path_from_dialog)
