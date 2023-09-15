@@ -6,7 +6,6 @@ import random
 import string
 from PIL import Image, ImageTk
 
-# Import your database-related modules here
 from db import mydb, new_db
 
 def get_image_path_from_dialog():
@@ -22,7 +21,6 @@ def save_image_with_random_name(image_path, base_folder, user_name):
             print("The specified file does not exist.")
             return
 
-        # Create a folder inside the base folder with the user's name
         user_folder = os.path.join(base_folder, user_name)
         if not os.path.exists(user_folder):
             os.makedirs(user_folder)
@@ -68,7 +66,6 @@ def submit_user_data():
     image_file_path = get_image_path_from_dialog()
     image_path = save_image_with_random_name(image_file_path, user_folder, user_name)
 
-    # Placeholder logic for transaction submission
     print("User data submitted")
 
 
@@ -82,7 +79,6 @@ def update_uploaded_image():
         image_label.image = img
 
 def transaction_selection():
-    # Hide the current form elements
     name_label.pack_forget()
     name_entry.pack_forget()
     firstname_label.pack_forget()
@@ -130,50 +126,39 @@ def show_transaction_form(selected_transaction):
         amount_label.pack()
         amount_entry = tk.Entry(root)
         amount_entry.pack()
-        # Add more fields as needed for deposit transaction
         
     elif selected_transaction == "Withdraw":
         amount_label = tk.Label(root, text="Amount:")
         amount_label.pack()
         amount_entry = tk.Entry(root)
         amount_entry.pack()
-        # Add more fields as needed for withdraw transaction
         
     elif selected_transaction == "Transfer":
-        # Add fields for transfer transaction
         pass
         
     elif selected_transaction == "Block":
-        # Add fields for block transaction
         pass
     
-    # Create a button to submit the transaction
     transaction_submit_button = tk.Button(root, text="Submit Transaction", command=lambda: submit_transaction(selected_transaction))
     transaction_submit_button.pack()
 
 def submit_transaction(selected_transaction):
-    # Perform the transaction logic based on the selected transaction
     if selected_transaction == "Deposit":
-        # Logic for deposit transaction
         pass
         
     elif selected_transaction == "Withdraw":
-        # Logic for withdraw transaction
         pass
         
     elif selected_transaction == "Transfer":
-        # Logic for transfer transaction
         pass
         
     elif selected_transaction == "Block":
-        # Logic for block transaction
         pass
 
 # Create a Tkinter window
 root = tk.Tk()
 root.title("Banking App")
 
-# Create labels and entry fields for user input
 name_label = tk.Label(root, text="Name:")
 name_label.pack()
 name_entry = tk.Entry(root)
@@ -226,12 +211,10 @@ city_entry.pack()
 image_label = tk.Label(root)
 image_label.pack()
 
-# Create a button to select an image
 image_button = tk.Button(root, text="Upload Image", command=update_uploaded_image)
 image_button.pack()
 
 submit_button = tk.Button(root, text="Submit User Data", command=submit_user_data)
 submit_button.pack()
 
-# Start the Tkinter main loop
 root.mainloop()
