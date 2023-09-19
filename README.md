@@ -1,6 +1,6 @@
 # prototype-bank-cli-app
 
-This python applications mimics our regular everyday bank transactions
+This python applications mimics our regular everyday bank transactions and runs as a CLI app
 It contains a main Account class other other class types that inherits the Account class
 It saves the application's data in a MySql database
 Some activities that are possible includes
@@ -29,3 +29,5 @@ Create a db_params.py file and set your parameters as shown;
 db_params = {"user":{YOUR_DB_ADMIN_USERNAME}, "password":{YOUR_DB_ADMIN_PASSWORD}}
 
 Run createtables.py once. Once your table is created, you need not run that script again except you delete your tables.
+
+This app also incorporates a UI, so that it can be tested in the terminal and on a form 
