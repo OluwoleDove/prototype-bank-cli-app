@@ -5,6 +5,7 @@ from tkinter import filedialog
 import random
 import string
 from PIL import Image, ImageTk
+from tkcalendar import DateEntry  # Import DateEntry from tkcalendar
 
 from db import mydb, new_db
 
@@ -50,7 +51,7 @@ def submit_user_data():
     user_email = email_entry.get()
     user_phone = phone_entry.get()
     user_gender = gender_var.get()
-    user_dob = dob_entry.get()
+    user_dob = dob_entry.get_date()
     user_occupation = occupation_entry.get()
     user_city = city_entry.get()
 
@@ -159,7 +160,7 @@ def submit_transaction(selected_transaction):
 root = tk.Tk()
 root.title("Banking App")
 
-name_label = tk.Label(root, text="Name:")
+name_label = tk.Label(root, text="Userame:")
 name_label.pack()
 name_entry = tk.Entry(root)
 name_entry.pack()
@@ -192,9 +193,10 @@ gender_options = ["Male", "Female", "Prefer not to say"]
 gender_menu = tk.OptionMenu(root, gender_var, *gender_options)
 gender_menu.pack()
 
-dob_label = tk.Label(root, text="Date of Birth (YYYY-MM-DD):")
+# Create the DateEntry widget for DOB
+dob_label = tk.Label(root, text="Date of Birth:")
 dob_label.pack()
-dob_entry = tk.Entry(root)
+dob_entry = DateEntry(root, date_pattern="yyyy-mm-dd")  # Specify the date pattern
 dob_entry.pack()
 
 occupation_label = tk.Label(root, text="Occupation:")
