@@ -20,7 +20,7 @@ class Savings(Account):
     def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city, balance):
         super().__init__(first_name, last_name, email, phone, gender, dob, occupation, city, balance)
         this.noy = 0
-        this.balance = this.balance
+        this.balance = balance #comes from database
 
     def show(this):
         print("Your savings account balance is " + this.balance)
@@ -29,13 +29,11 @@ class Savings(Account):
         this.balance += this.balance * 0.05 * this.noy
         print(("Savings account balance for {0} after adding interest is; {1}").format(this.first_name, this.balance))
     
-    def deposit(this, balance, amount):
-        this.balance = balance
+    def deposit(this, amount):
         this.balance += amount
         return this.balance
 
-    def withdraw(this, balance, amount):
-        this.balance = balance
+    def withdraw(this, amount):
         this.balance += amount
         return this.balance
         

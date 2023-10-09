@@ -6,7 +6,7 @@ mydb = mysql.connector.connect(
     host = "localhost",
     user = db_params["user"],
     password = db_params["password"],
-    database="bank_cli_db" #returns an error if DB does not exist
+    database="bank_cli_db" 
 )
 
 new_db = mydb.cursor()
