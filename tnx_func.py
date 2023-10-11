@@ -21,7 +21,7 @@ def gen_account(this_len):
     return acc_num
 
 
-def process_transactions(arg_dict, account_type, tnx_type): 
+def process_transactions(arg_dict, tnx_type): 
     db_instance = mydb.cursor()
 
     if tnx_type == 'create_account':
