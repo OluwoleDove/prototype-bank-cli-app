@@ -2,12 +2,7 @@ from receive_inputs import input_prompt
 from tnx_func import process_transactions
 
 def bank_mix():
-    acc_type = ""
-    option = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
-    if option == "1":
-        acc_type = "Savings"
-    elif option == "2":
-        acc_type = "Current"
+    
     else:
         print("Wrong entry! Please try again.")
         bank_mix()

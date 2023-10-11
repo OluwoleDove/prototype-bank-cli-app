@@ -21,16 +21,17 @@ def gen_account(this_len):
     return acc_num
 
 
-def process_transactions(arg_dict, account_type, tnx_type):
-    if account_type == "Savings":
-        this_client = Savings(arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'],  arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'])
-    elif account_type == "Current":
-        this_client = Current(arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'],  arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'])
-        
+def process_transactions(arg_dict, account_type, tnx_type): 
     db_instance = mydb.cursor()
 
     if tnx_type == 'create_account':
         pin = 1000
+        acc_type = input("\nSelect your account type: \n1. Savings Account\n2. Current Account\n\n")
+        if acc_type == "1":
+            this_client = Savings(arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'],  arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'])
+        elif acc_type == "2":
+            this_client = Current(arg_dict['firstname'], arg_dict['lastname'], arg_dict['email'], arg_dict['phone'],  arg_dict['gender'], arg_dict['dob'], arg_dict['occupation'], arg_dict['city'])
+
         new_account = gen_account(10)
         #Create Client's Bio
         sql = "INSERT INTO users (firstname, lastname, email, phone, gender, dob, occupation, city, join_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
