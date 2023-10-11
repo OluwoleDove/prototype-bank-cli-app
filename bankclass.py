@@ -1,5 +1,5 @@
 class Account:
-    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city):
+    def __init__(this, first_name, last_name, email, phone, gender, dob, occupation, city, acc_type):
         this.first_name = first_name
         this.last_name = last_name
         this.email = email
@@ -8,7 +8,11 @@ class Account:
         this.dob = dob
         this.occupation = occupation
         this.city =  city
+        this.acc_type = acc_type
         this.balance = 0.0
+
+    def create_account(this):
+        pass
 
     def create_pin(this, user_pin):
         if len(user_pin) > 4:

@@ -4,7 +4,7 @@ import datetime
 import random
 
 def find_client(my_model):
-    pin = str(input("Your pin number please: "))
+    pin = input("Your pin number please: ")
     sql = "SELECT * FROM accounts where pin = %s"
     val = ([pin])
     my_model.execute(sql, val)
